@@ -12,20 +12,17 @@ namespace RozetkaTests
         [TestInitialize]
         public void SetUp()
         {
-            app = new AppManager();
+            app = AppManager.GetInstance();
         }
-
 
         [TestMethod]
-        public void Test1()
+        public void Search()
         {
-            
+            string searchWord = "Hyundai";
+            app.FilteringHelper.SearchByWord(searchWord);
+            //Assert.IsTrue(app.FilteringHelper.ResultsContain(searchWord));
+            //Assert.IsTrue(app.FilteringHelper.Show32ProductExists());
         }
 
-        [TestCleanup]
-        public void Finish()
-        {
-            app.Quit();
-        }
     }
 }

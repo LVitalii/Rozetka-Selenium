@@ -12,25 +12,59 @@ namespace RozetkaApp
 {
     public class AppManager
     {
-        private static IWebDriver driver;
-        static string baseUrl = @"http://rozetka.com.ua";
+        private static AppManager app = null;
+        private IWebDriver driver;
+        private static string baseUrl;
+        private SearchHelper searchHelper;
+        private FilteringHelper filteringHelper;
 
-        static AppManager ()
+        private AppManager ()
         {
             driver = new ChromeDriver();
-            driver.Url = baseUrl;
+            baseUrl = @"http://rozetka.com.ua";
+            PageInitialization(this);
+        }        
+
+        public static AppManager GetInstance()
+        {
+            if (app == null)
+            {
+                app = new AppManager();
+                app.driver.Navigate().GoToUrl(baseUrl);  
+            }
+            return app;
         }
-        
+
         public IWebDriver Driver
         {
             get { return driver; }
         }
 
-
-
-        public void Quit()
+        ~AppManager()
         {
             driver.Quit();
+        }
+
+        private void PageInitialization(AppManager manager)
+        {
+            searchHelper = new SearchHelper(manager);
+            filteringHelper = new FilteringHelper(manager);
+        }
+
+        public SearchHelper SearchHelper
+        {
+            get { return this.searchHelper; }
+        }
+
+        public FilteringHelper FilteringHelper
+        {
+            get { return this.filteringHelper; }
+        }
+
+        public void Wait(string id)
+        {
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+            IWebElement searchedWord = wait.Until<IWebElement>(d => d.FindElement(By.Id(id)));
         }
     }
 }
