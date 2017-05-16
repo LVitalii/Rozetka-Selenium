@@ -12,25 +12,35 @@ namespace RozetkaApp
 {
     public class AppManager
     {
-        private static IWebDriver driver;
-        static string baseUrl = @"http://rozetka.com.ua";
+        private static AppManager app = null;
+        private IWebDriver driver;
+        private string baseUrl;
 
-        static AppManager ()
+        private AppManager()
         {
             driver = new ChromeDriver();
-            driver.Url = baseUrl;
+            baseUrl = @"http://rozetka.com.ua";
         }
+
+        public static AppManager GetInstance()
+        {
+            if (app == null)
+            {
+                app = new AppManager();
+                app.driver.Navigate().GoToUrl(app.baseUrl);
+            }
+            return app;
+        }
+
         
         public IWebDriver Driver
         {
             get { return driver; }
         }
 
-
-
-        public void Quit()
+        ~AppManager()
         {
             driver.Quit();
-        }
+        }        
     }
 }

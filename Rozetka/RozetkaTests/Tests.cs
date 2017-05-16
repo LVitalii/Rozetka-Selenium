@@ -12,7 +12,7 @@ namespace RozetkaTests
         [TestInitialize]
         public void SetUp()
         {
-            app = new AppManager();
+            app = AppManager.GetInstance();
         }
 
 
@@ -25,7 +25,7 @@ namespace RozetkaTests
         [TestCleanup]
         public void Finish()
         {
-            app.Quit();
+            
         }
     }
 }
