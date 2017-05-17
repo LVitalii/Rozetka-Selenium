@@ -14,7 +14,6 @@ namespace RozetkaApp
     {
         private static AppManager app = null;
         private IWebDriver driver;
-<<<<<<< HEAD
         private static string baseUrl;
         private SearchHelper searchHelper;
         private FilteringHelper filteringHelper;
@@ -36,34 +35,12 @@ namespace RozetkaApp
             return app;
         }
 
-=======
-        private string baseUrl;
-
-        private AppManager()
-        {
-            driver = new ChromeDriver();
-            baseUrl = @"http://rozetka.com.ua";
-        }
-
-        public static AppManager GetInstance()
-        {
-            if (app == null)
-            {
-                app = new AppManager();
-                app.driver.Navigate().GoToUrl(app.baseUrl);
-            }
-            return app;
-        }
-
-        
->>>>>>> 5864d10210f1a4af9031771513b0afbd4f2281d5
         public IWebDriver Driver
         {
             get { return driver; }
         }
 
         ~AppManager()
-<<<<<<< HEAD
         {
             driver.Quit();
         }
@@ -89,10 +66,5 @@ namespace RozetkaApp
             WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
             IWebElement searchedWord = wait.Until<IWebElement>(d => d.FindElement(By.Id(id)));
         }
-=======
-        {
-            driver.Quit();
-        }        
->>>>>>> 5864d10210f1a4af9031771513b0afbd4f2281d5
     }
 }
