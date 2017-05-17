@@ -7,5 +7,17 @@ D:\Projects\Automation Mentoring\Selenium rozetka\Rozetka\RozetkaTests\bin\Debug
 D:\Projects\Automation Mentoring\Selenium rozetka\Rozetka\RozetkaTests\bin\Debug\WebDriver.xml
 D:\Projects\Automation Mentoring\Selenium rozetka\Rozetka\RozetkaTests\obj\Debug\RozetkaTests.dll
 D:\Projects\Automation Mentoring\Selenium rozetka\Rozetka\RozetkaTests\obj\Debug\RozetkaTests.pdb
+<<<<<<< HEAD
 D:\Projects\Automation Mentoring\Selenium rozetka\Rozetka\RozetkaTests\bin\Debug\WebDriver.Support.dll
 D:\Projects\Automation Mentoring\Selenium rozetka\Rozetka\RozetkaTests\bin\Debug\WebDriver.Support.xml
+=======
+D:\Projects\AutomationMentoring\Seleniun rozetka\Rozetka\RozetkaTests\bin\Debug\RozetkaTests.dll
+D:\Projects\AutomationMentoring\Seleniun rozetka\Rozetka\RozetkaTests\bin\Debug\RozetkaTests.pdb
+D:\Projects\AutomationMentoring\Seleniun rozetka\Rozetka\RozetkaTests\bin\Debug\RozetkaApp.dll
+D:\Projects\AutomationMentoring\Seleniun rozetka\Rozetka\RozetkaTests\bin\Debug\WebDriver.dll
+D:\Projects\AutomationMentoring\Seleniun rozetka\Rozetka\RozetkaTests\bin\Debug\RozetkaApp.pdb
+D:\Projects\AutomationMentoring\Seleniun rozetka\Rozetka\RozetkaTests\bin\Debug\WebDriver.xml
+D:\Projects\AutomationMentoring\Seleniun rozetka\Rozetka\RozetkaTests\obj\Debug\RozetkaTests.csprojResolveAssemblyReference.cache
+D:\Projects\AutomationMentoring\Seleniun rozetka\Rozetka\RozetkaTests\obj\Debug\RozetkaTests.dll
+D:\Projects\AutomationMentoring\Seleniun rozetka\Rozetka\RozetkaTests\obj\Debug\RozetkaTests.pdb
+>>>>>>> 5864d10210f1a4af9031771513b0afbd4f2281d5

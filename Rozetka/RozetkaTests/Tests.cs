@@ -24,5 +24,13 @@ namespace RozetkaTests
             //Assert.IsTrue(app.FilteringHelper.Show32ProductExists());
         }
 
+<<<<<<< HEAD
+=======
+        [TestCleanup]
+        public void Finish()
+        {
+            
+        }
+>>>>>>> 5864d10210f1a4af9031771513b0afbd4f2281d5
     }
 }

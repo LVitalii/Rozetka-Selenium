@@ -55,8 +55,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppManager.cs" />
+<<<<<<< HEAD
     <Compile Include="Helpers\BaseHelper.cs" />
     <Compile Include="Helpers\FilteringHelper.cs" />
+=======
+    <Compile Include="HelperBase.cs" />
+    <Compile Include="Program.cs" />
+>>>>>>> 5864d10210f1a4af9031771513b0afbd4f2281d5
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Helpers\SearchHelper.cs" />
   </ItemGroup>
