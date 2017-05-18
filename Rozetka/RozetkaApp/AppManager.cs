@@ -7,6 +7,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support;
 using OpenQA.Selenium.Support.UI;
+using OpenQA.Selenium.Interactions;
 
 namespace RozetkaApp
 {
@@ -17,7 +18,8 @@ namespace RozetkaApp
         private static string baseUrl;
         private SearchHelper searchHelper;
         private FilteringHelper filteringHelper;
-
+        private NavigationHelper navigationHelper;
+        
         private AppManager ()
         {
             driver = new ChromeDriver();
@@ -30,14 +32,24 @@ namespace RozetkaApp
             if (app == null)
             {
                 app = new AppManager();
-                app.driver.Navigate().GoToUrl(baseUrl);  
+                app.driver.Manage().Window.Maximize();
             }
             return app;
+        }
+
+        public void GoToBasePage()
+        {
+            app.driver.Navigate().GoToUrl(baseUrl);
         }
 
         public IWebDriver Driver
         {
             get { return driver; }
+        }
+
+        public Actions ActionWithElement
+        {
+            get { return new Actions(driver); }
         }
 
         ~AppManager()
@@ -49,6 +61,7 @@ namespace RozetkaApp
         {
             searchHelper = new SearchHelper(manager);
             filteringHelper = new FilteringHelper(manager);
+            navigationHelper = new NavigationHelper(manager);
         }
 
         public SearchHelper SearchHelper
@@ -61,10 +74,39 @@ namespace RozetkaApp
             get { return this.filteringHelper; }
         }
 
-        public void Wait(string id)
+        public NavigationHelper NavigationHelper
+        {
+            get { return this.navigationHelper; }
+        }
+
+        public void WaitForElementById(string id)
         {
             WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
-            IWebElement searchedWord = wait.Until<IWebElement>(d => d.FindElement(By.Id(id)));
+            IWebElement searchedElement = wait.Until<IWebElement>(d => d.FindElement(By.Id(id)));
+        }
+
+        public void WaitForElementByXpath(string xpath)
+        {
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+            IWebElement searchedElement = wait.Until<IWebElement>(d => d.FindElement(By.XPath(xpath)));
+        }
+
+        public int ParseTextToInt(IWebElement element)
+        {
+            int res;
+            
+            string textIn = element.Text;
+            string line = "";
+            foreach (char c in textIn)
+            {
+                if (Int32.TryParse(c.ToString(), out res))
+                {
+                    line=String.Concat(line, c);
+                }
+            }
+            Int32.TryParse(line, out res);
+
+            return res;
         }
     }
 }

@@ -13,16 +13,26 @@ namespace RozetkaTests
         public void SetUp()
         {
             app = AppManager.GetInstance();
+            app.GoToBasePage();
         }
 
         [TestMethod]
-        public void Search()
+        public void MainSearch()
         {
             string searchWord = "Hyundai";
-            app.FilteringHelper.SearchByWord(searchWord);
-            //Assert.IsTrue(app.FilteringHelper.ResultsContain(searchWord));
-            //Assert.IsTrue(app.FilteringHelper.Show32ProductExists());
+            app.SearchHelper.SearchByWord(searchWord);
+            Assert.IsTrue(app.SearchHelper.ResultsContain(searchWord));
+            Assert.IsTrue(app.SearchHelper.Show32ProductExists());
         }
 
+        [TestMethod]
+        public void FilterInSmartphones()
+        {
+            app.NavigationHelper.GoToSmartphones();
+            string[] producers = { "Apple", "Samsung" };
+            app.FilteringHelper.CheckProducers(producers);
+            app.FilteringHelper.SortByPriceDesc();
+            Assert.IsTrue(app.FilteringHelper.IsProductsSortedByPriceDesc());
+        }
     }
 }

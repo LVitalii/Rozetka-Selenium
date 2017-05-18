@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
 
 namespace RozetkaApp
 {
@@ -12,26 +13,55 @@ namespace RozetkaApp
         public FilteringHelper(AppManager manager) : base(manager)
         { 
         }
+        
+        public void CheckProducers(string[] producers)
+        {                        
+            foreach (string producer in producers)
+            {
+                IWebElement showMoreProducers = manager.Driver.FindElement(By.XPath("//div[@param='producer']//a[@name='show_more_parameters']"));
+                showMoreProducers.Click();
 
-        public void SearchByWord(string searchWord)
-        {
-            IWebElement searchField = driver.FindElement(By.CssSelector("input.rz-header-search-input-text.passive"));
-            searchField.SendKeys(searchWord);
-            IWebElement searchButton = driver.FindElement(By.CssSelector("button[name='rz-search-button']"));
-            searchButton.Click();
-            string searchResultId = "search_result_title_text"; 
-            manager.Wait(searchResultId);
+                IList<IWebElement> producersItems = manager.Driver.FindElements(By.XPath("//div[@param='producer']//i[@class='filter-parametrs-i-l-i-default-title']"));
+
+                foreach (IWebElement producerItem in producersItems)
+                {
+                    if (producerItem.Text.Contains(producer))
+                    {
+                        producerItem.Click();
+                        string producerXpath = string.Format("//div[@class='filter-active']//a[contains(.,'{0}')]", producer);
+
+                        manager.WaitForElementByXpath(producerXpath);
+                        break;
+                    }
+                }
+            }
         }
 
-        public bool ResultsContain(string searchWord)
+        public void SortByPriceDesc()
         {
+            IWebElement sortList = manager.Driver.FindElement(By.CssSelector(".sort-view-link"));
+            sortList.Click();
+            IWebElement priceDesc = manager.Driver.FindElement(By.XPath("//li[@id='filter_sortexpensive']/a"));
+            priceDesc.Click();
 
-            throw new NotImplementedException();
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+            wait.Until(d => d.FindElement(By.XPath("//div[@name='drop_menu']")).GetAttribute("style").Contains("visibility: hidden;"));
+            
         }
 
-        public bool Show32ProductExists()
+        public bool IsProductsSortedByPriceDesc()
         {
-            throw new NotImplementedException();
+            IList<IWebElement> prices = manager.Driver.FindElements(By.ClassName("g-price-uah"));
+            bool isDescending = true;
+            int prevPrice = manager.ParseTextToInt(prices[0]); 
+            foreach (IWebElement price in prices)
+            {
+                int currPrice = manager.ParseTextToInt(price);
+                isDescending = currPrice <= prevPrice ? isDescending & true : isDescending & false;
+                prevPrice = currPrice;
+            }
+            return isDescending;
         }
+
     }
 }

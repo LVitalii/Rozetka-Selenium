@@ -57,6 +57,7 @@
     <Compile Include="AppManager.cs" />
     <Compile Include="Helpers\BaseHelper.cs" />
     <Compile Include="Helpers\FilteringHelper.cs" />
+    <Compile Include="Helpers\NavigationHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Helpers\SearchHelper.cs" />
   </ItemGroup>
